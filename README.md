@@ -171,8 +171,10 @@ class AndroidUnityActivity : UnityPlayerActivity() {
     />
 </activity>
 ```
+## 4. IOS implementation:
+Will be updating it soon
 
-## 4. Communication Flow
+## 5. Communication Flow
 
 ### How Messages Flow
 1. **KMP to Android**:
@@ -207,7 +209,7 @@ class AndroidUnityActivity : UnityPlayerActivity() {
 - Messages are one-way (Android to Unity)
 - Unity callback methods must match the exact signature expected
 
-## 5. Common Issues and Solutions
+## 6. Common Issues and Solutions
 
 1. **Message Not Received in Unity**
     - Check GameObject name matches exactly
