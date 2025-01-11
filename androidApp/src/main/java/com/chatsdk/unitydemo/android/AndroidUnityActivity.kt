@@ -1,5 +1,6 @@
 package com.chatsdk.unitydemo.android
 
+
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -9,71 +10,10 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.LinearLayout
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
-import com.unity3d.player.UnityPlayerActivity
-import com.unity3d.player.UnityPlayerForActivityOrService
-import com.unity3d.player.UnityPlayerGameActivity
-
-
-
-//class AndroidUnityActivity : UnityPlayerActivity() {
-//    private val receiver = object : BroadcastReceiver() {
-//        override fun onReceive(context: Context?, intent: Intent?) {
-//            when (intent?.action) {
-//                "com.chatsdk.unitydemo.START_ANIMATION" -> triggerParticleAnimation()
-//                "com.chatsdk.unitydemo.CLEANUP" -> finish()
-//            }
-//        }
-//    }
-//
-//    @RequiresApi(Build.VERSION_CODES.O)
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        registerReceiver(receiver, IntentFilter().apply {
-//            addAction("com.chatsdk.unitydemo.START_ANIMATION")
-//            addAction("com.chatsdk.unitydemo.CLEANUP")
-//        }, RECEIVER_NOT_EXPORTED)
-//    }
-//
-//    override fun onDestroy() {
-//        unregisterReceiver(receiver)
-//        super.onDestroy()
-//    }
-//
-//    private fun triggerParticleAnimation() {
-//        mUnityPlayer?.let { player ->
-//            player.getFrameLayout().post {
-//                player.getFrameLayout().javaClass.getMethod("UnitySendMessage", String::class.java, String::class.java, String::class.java)
-//                    .invoke(player.getFrameLayout(), "ParticleSystem", "StartParticleAnimation", "")
-//            }
-//        }
-//    }
-//}
-
-// androidApp/src/main/kotlin/com/example/unitykmp/android/AndroidUnityActivity.kt
-
-
-// androidApp/src/main/kotlin/com/example/unitykmp/android/AndroidUnityActivity.kt
-
-
-// androidApp/src/main/kotlin/com/example/unitykmp/android/AndroidUnityActivity.kt
-// androidApp/src/main/kotlin/com/example/unitykmp/android/AndroidUnityActivity.kt
-
 import com.unity3d.player.UnityPlayer
+import com.unity3d.player.UnityPlayerActivity
 
 class AndroidUnityActivity : UnityPlayerActivity() {
     private val receiver = object : BroadcastReceiver() {

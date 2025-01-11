@@ -46,7 +46,7 @@ dependencies {
     implementation(files("libs/unityLibrary.aar"))
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
-//    implementation("androidx.games:games-activity:3.0.5")
-//    implementation(files("libs/unity-classes.jar"))
+    implementation("androidx.savedstate:savedstate-ktx:1.2.1")
+    implementation("androidx.core:core-ktx:1.12.0")
 
 }
