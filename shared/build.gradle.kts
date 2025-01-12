@@ -17,15 +17,27 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
+    ).forEach { target ->
+        target.binaries.framework {
             baseName = "shared"
             isStatic = true
+        }
+
+        target.compilations.getByName("main") {
+            cinterops {
+                create("unity") {
+                    defFile(project.file("src/nativeInterop/cinterop/unity.def"))
+                    packageName("com.chatsdk.unitydemo")
+
+                    // Add headers directory
+                    headers(project.file("src/nativeInterop/headers"))
+                }
+            }
         }
     }
 

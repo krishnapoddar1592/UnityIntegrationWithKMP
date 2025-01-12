@@ -1,17 +1,20 @@
-//
-//  UnityFrameworkWrapper.swift
-//  iosApp
-//
-//  Created by Krishna Poddar on 12/01/25.
-//  Copyright © 2025 orgName. All rights reserved.
-//
-
 import UnityFramework
 
-
-class UnityFrameworkWrapper {
-    static let shared = UnityFrameworkWrapper()
+@objc public class UnityFrameworkWrapper: NSObject, UnityFrameworkListener {
+    @objc public static let shared = UnityFrameworkWrapper()
     private var unityFramework: UnityFramework?
+
+    private override init() {
+        super.init()
+    }
+
+    @objc public func unityDidUnload(_ notification: Notification!) {
+        // Handle Unity unload
+    }
+
+    @objc public func unityDidQuit(_ notification: Notification!) {
+        // Handle Unity quit
+    }
 
     private func getUnityFramework() -> UnityFramework? {
         let bundlePath = Bundle.main.bundlePath
@@ -25,7 +28,7 @@ class UnityFrameworkWrapper {
         return frameworkClass?.getInstance()
     }
 
-    func initialize() {
+    @objc public func initialize() {
         if unityFramework != nil {
             return
         }
@@ -33,10 +36,17 @@ class UnityFrameworkWrapper {
         unityFramework = getUnityFramework()
         unityFramework?.setDataBundleId("com.chatsdk.unitydemo")
         unityFramework?.register(self)
-        unityFramework?.runEmbedded()
+
+        let argc = CommandLine.argc
+        let argv = CommandLine.unsafeArgv
+        unityFramework?.runEmbedded(withArgc: Int32(argc), argv: argv, appLaunchOpts: nil)
     }
 
-    func sendMessage(_ gameObject: String, _ method: String, _ message: String) {
+    @objc public func getUnityView() -> UIView? {
+        return unityFramework?.appController()?.rootView
+    }
+
+    @objc public func sendMessage(_ gameObject: String, _ method: String, _ message: String) {
         unityFramework?.sendMessageToGO(
             withName: gameObject,
             functionName: method,
@@ -44,10 +54,8 @@ class UnityFrameworkWrapper {
         )
     }
 
-    func cleanup() {
+    @objc public func cleanup() {
         unityFramework?.unloadApplication()
         unityFramework = nil
     }
 }
-
-

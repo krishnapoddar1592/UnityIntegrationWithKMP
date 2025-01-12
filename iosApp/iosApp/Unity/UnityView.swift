@@ -9,14 +9,15 @@
 
 import SwiftUI
 import UnityFramework
+import UIKit
 
 struct UnityView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
         let hostingController = UIViewController()
 
-        if let unityView = UnityFrameworkWrapper.shared.unityFramework?.appController()?.rootView {
+        if let unityView = UnityFrameworkWrapper.shared.getUnityView() {
             unityView.frame = hostingController.view.bounds
-            unityView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            unityView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
             hostingController.view.addSubview(unityView)
         }
 
