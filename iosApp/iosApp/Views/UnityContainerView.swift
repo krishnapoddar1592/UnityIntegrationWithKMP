@@ -13,23 +13,45 @@ import SwiftUI
 import shared
 
 struct UnityContainerView: View {
-    private let unityBridge = PlatformUnityBridge(context: nil)
+    @StateObject private var viewModel = UnityViewModel()
     
     var body: some View {
         VStack {
             UnityView()
-                .frame(height: UIScreen.main.bounds.height * 0.6)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .onAppear {
+                    viewModel.initialize()
+                }
+                .onDisappear {
+                    viewModel.cleanup()
+                }
             
             Button("Start Animation") {
-                unityBridge.startParticleAnimation()
+                viewModel.startAnimation()
             }
             .padding()
         }
-        .onAppear {
-            unityBridge.initialize()
+    }
+}
+
+class UnityViewModel: ObservableObject {
+    private let unityBridge = PlatformUnityBridge(context: nil)
+    
+    func initialize() {
+        DispatchQueue.main.async {
+            self.unityBridge.initialize()
         }
-        .onDisappear {
-            unityBridge.cleanup()
+    }
+    
+    func startAnimation() {
+        DispatchQueue.main.async {
+            self.unityBridge.startParticleAnimation()
+        }
+    }
+    
+    func cleanup() {
+        DispatchQueue.main.async {
+            self.unityBridge.cleanup()
         }
     }
 }

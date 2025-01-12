@@ -7,7 +7,7 @@ import android.content.Intent
 
 
 actual class PlatformUnityBridge actual constructor(private val context: Any?) : UnityBridge {
-    override fun initialize() {
+    actual override fun initialize() {
         (context as? Context)?.let { ctx ->
             try {
                 val unityActivityClass = Class.forName("com.chatsdk.unitydemo.android.AndroidUnityActivity")
@@ -20,14 +20,14 @@ actual class PlatformUnityBridge actual constructor(private val context: Any?) :
         }
     }
 
-    override fun startParticleAnimation() {
+    actual override fun startParticleAnimation() {
         (context as? Context)?.let { ctx ->
             val intent = Intent("com.chatsdk.unitydemo.START_ANIMATION")
             ctx.sendBroadcast(intent)
         }
     }
 
-    override fun cleanup() {
+    actual override fun cleanup() {
         (context as? Context)?.let { ctx ->
             val intent = Intent("com.chatsdk.unitydemo.CLEANUP")
             ctx.sendBroadcast(intent)

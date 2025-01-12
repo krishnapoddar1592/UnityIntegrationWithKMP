@@ -1,8 +1,10 @@
+import org.gradle.declarative.dsl.schema.FqName.Empty.packageName
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    id("io.github.ttypic.swiftklib") version "0.6.4"
 }
 
 kotlin {
@@ -16,9 +18,6 @@ kotlin {
         }
     }
 
-    ios()
-    iosSimulatorArm64()
-
     listOf(
         iosX64(),
         iosArm64(),
@@ -28,7 +27,16 @@ kotlin {
             baseName = "shared"
             isStatic = true
         }
+        target.compilations {
+            val main by getting {
+                cinterops{
+                    create("Unity")
+                }
+            }
+        }
     }
+    ios()
+    iosSimulatorArm64()
 
     sourceSets {
         commonMain.dependencies {
@@ -53,4 +61,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
+swiftklib{
+    create("Unity"){
+        path=file("../iosApp/iosApp/Unity")
+        packageName("com.chatsdk.unitydemo")
+    }
+}
+
+
 
