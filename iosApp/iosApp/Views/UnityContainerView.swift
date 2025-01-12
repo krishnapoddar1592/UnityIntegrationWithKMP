@@ -7,11 +7,13 @@
 //
 
 
+// iosApp/iosApp/Views/UnityContainerView.swift
+// iosApp/iosApp/Views/UnityContainerView.swift
 import SwiftUI
 import shared
 
 struct UnityContainerView: View {
-    private let unityBridge = PlatformUnityBridge(context: nil) // Added 'context:' label
+    private let unityBridge = PlatformUnityBridge(context: nil)
     
     var body: some View {
         VStack {
@@ -23,6 +25,11 @@ struct UnityContainerView: View {
             }
             .padding()
         }
+        .onAppear {
+            unityBridge.initialize()
+        }
+        .onDisappear {
+            unityBridge.cleanup()
+        }
     }
 }
-

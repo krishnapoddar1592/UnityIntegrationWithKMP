@@ -5,6 +5,7 @@ import com.chatsdk.unitydemo.UnityBridge
 import android.content.Context
 import android.content.Intent
 
+
 actual class PlatformUnityBridge actual constructor(private val context: Any?) : UnityBridge {
     override fun initialize() {
         (context as? Context)?.let { ctx ->
