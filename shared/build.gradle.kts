@@ -7,6 +7,7 @@ plugins {
 
 kotlin {
     ios()
+    iosSimulatorArm64()
     androidTarget {
         compilations.all {
             compileTaskProvider.configure {
@@ -37,6 +38,11 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+
+        val iosMain by getting
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
         }
     }
 }
