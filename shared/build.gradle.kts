@@ -36,6 +36,11 @@ kotlin {
 
                     // Add headers directory
                     headers(project.file("src/nativeInterop/headers"))
+
+                    // Specify compiler options
+                    compilerOpts.add("-F${project.projectDir}/../../iosApp/Frameworks")
+                    compilerOpts.add("-I${project.projectDir}/../../iosApp/Frameworks/UnityFramework.framework/Headers")
+                    compilerOpts.add("-I${project.projectDir}/src/nativeInterop/headers")
                 }
             }
         }

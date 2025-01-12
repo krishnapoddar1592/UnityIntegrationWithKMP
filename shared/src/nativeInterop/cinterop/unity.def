@@ -1,5 +1,5 @@
 headers = ../headers/UnityFrameworkWrapper.h
 package = com.chatsdk.unitydemo
 language = Objective-C
-compilerOpts = -F${projectDir}/../iosApp/Frameworks
-linkerOpts = -F${projectDir}/../iosApp/Frameworks -framework UnityFramework -framework Foundation -framework UIKit
+compilerOpts = -F${projectDir}/../../iosApp/Frameworks -I${projectDir}/../../iosApp/Frameworks/UnityFramework.framework/Headers
+linkerOpts = -F${projectDir}/../../iosApp/Frameworks -framework UnityFramework -framework Foundation -framework UIKit
