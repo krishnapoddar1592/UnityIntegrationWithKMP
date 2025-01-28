@@ -5,5 +5,4 @@ plugins {
     alias(libs.plugins.kotlinAndroid).apply(false)
     alias(libs.plugins.kotlinMultiplatform).apply(false)
     alias(libs.plugins.compose.compiler).apply(false)
-    id("io.github.ttypic.swiftklib") version "0.6.4"
 }

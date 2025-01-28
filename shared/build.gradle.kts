@@ -1,19 +1,13 @@
-import org.gradle.declarative.dsl.schema.FqName.Empty.packageName
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    id("io.github.ttypic.swiftklib") version "0.6.4"
 }
 
 kotlin {
     androidTarget {
         compilations.all {
-            compileTaskProvider.configure {
-                compilerOptions {
-                    jvmTarget.set(JvmTarget.JVM_1_8)
-                }
+            kotlinOptions {
+                jvmTarget = "1.8"
             }
         }
     }
@@ -27,25 +21,31 @@ kotlin {
             baseName = "shared"
             isStatic = true
         }
-        target.compilations {
-            val main by getting {
-                cinterops{
-                    create("Unity")
-                }
-            }
-        }
     }
-    ios()
-    iosSimulatorArm64()
 
     sourceSets {
         commonMain.dependencies {
-            // your dependencies
+            // Common dependencies if needed
         }
 
-        val iosMain by getting
-        val iosSimulatorArm64Main by getting {
-            dependsOn(iosMain)
+        androidMain.dependencies {
+            // Android specific dependencies
+        }
+
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
+
+        // Shared iOS source set
+        val iosMain by creating {
+            dependsOn(commonMain.get())
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
+
+            dependencies {
+                // iOS specific dependencies if needed
+            }
         }
     }
 }
@@ -56,17 +56,4 @@ android {
     defaultConfig {
         minSdk = 24
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
 }
-swiftklib{
-    create("Unity"){
-        path=file("../iosApp/iosApp/Unity")
-        packageName("com.chatsdk.unitydemo")
-    }
-}
-
-
-

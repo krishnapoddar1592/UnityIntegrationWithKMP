@@ -15,6 +15,14 @@
             android:screenOrientation="fullUser">
             <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
         </activity>
+        <activity
+            android:name=".ComposeUnityActivity"
+            android:theme="@style/UnityParentTheme"
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale|layoutDirection|density"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="fullUser">
+            <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+        </activity>
 
         <activity
             android:name=".MainActivity"

@@ -7,10 +7,22 @@ import android.content.Intent
 
 
 actual class PlatformUnityBridge actual constructor(private val context: Any?) : UnityBridge {
+//    actual override fun initialize() {
+//        (context as? Context)?.let { ctx ->
+//            try {
+//                val unityActivityClass = Class.forName("com.chatsdk.unitydemo.android.AndroidUnityActivity")
+//                val intent = Intent(ctx, unityActivityClass as Class<*>)
+//                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//                ctx.startActivity(intent)
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//            }
+//        }
+//    }
     actual override fun initialize() {
         (context as? Context)?.let { ctx ->
             try {
-                val unityActivityClass = Class.forName("com.chatsdk.unitydemo.android.AndroidUnityActivity")
+                val unityActivityClass = Class.forName("com.chatsdk.unitydemo.android.ComposeUnityActivity")
                 val intent = Intent(ctx, unityActivityClass as Class<*>)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 ctx.startActivity(intent)
@@ -19,6 +31,14 @@ actual class PlatformUnityBridge actual constructor(private val context: Any?) :
             }
         }
     }
+
+//    actual override fun initialize() {
+//        (context as? Context)?.let { ctx ->
+//            val intent = Intent(ctx, ComposeUnityActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//            ctx.startActivity(intent)
+//        }
+//    }
 
     actual override fun startParticleAnimation() {
         (context as? Context)?.let { ctx ->

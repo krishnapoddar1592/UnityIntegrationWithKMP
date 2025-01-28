@@ -16,6 +16,9 @@ import com.unity3d.player.UnityPlayer
 import com.unity3d.player.UnityPlayerActivity
 
 class AndroidUnityActivity : UnityPlayerActivity() {
+    fun getUnityPlayer(): UnityPlayer {
+        return mUnityPlayer // Now accessible if your module has the same package as UnityPlayerActivity
+    }
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             when (intent?.action) {
